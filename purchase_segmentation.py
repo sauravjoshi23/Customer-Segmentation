@@ -46,12 +46,13 @@ if __name__ == '__main__':
     user_aisle_matrix = create_user_aisle_matrix(data)
     scaled_data = scale_data(user_aisle_matrix)
     # determine_optimal_clusters(scaled_data)
-    num_clusters = 2
+    num_clusters = 50
     kmeans_labels = apply_kmeans(scaled_data, num_clusters)
-    dbscan_labels = apply_dbscan(scaled_data)
+    # dbscan_labels = apply_dbscan(scaled_data)
     kmeans_clusters_summary = interpret_clusters(user_aisle_matrix, kmeans_labels)
     print(kmeans_clusters_summary)
-    dbscan_clusters_summary = interpret_clusters(user_aisle_matrix, dbscan_labels)
-    print(dbscan_clusters_summary)
+    # dbscan_clusters_summary = interpret_clusters(user_aisle_matrix, dbscan_labels)
+    # print(dbscan_clusters_summary)
     kmeans_clusters_summary.to_csv(folder_path+'kmeans_cluster_summary.csv')
-    dbscan_clusters_summary.to_csv(folder_path+'dbscan_cluster_summary.csv')
+    pd.Series(kmeans_labels).to_csv(folder_path+'kmeans_labels.csv', index=False) 
+    # dbscan_clusters_summary.to_csv(folder_path+'dbscan_cluster_summary.csv')
